@@ -7,10 +7,10 @@ defaultTasks 'run'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile project(":freehourslib")
+    implementation project(":freehourslib")
 }
 
 jar {
     manifest { attributes 'Main-Class': 'MainKt' }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
