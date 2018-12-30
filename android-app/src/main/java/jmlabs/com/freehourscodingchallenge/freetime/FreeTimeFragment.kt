@@ -46,9 +46,12 @@ class FreeTimeFragment : Fragment() {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MeetingsViewModel::class.java)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(MeetingsViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
         viewModel.freeTimes.observe(this, Observer {
             freeTimeAdapter.setDataSet(it ?: listOf())
