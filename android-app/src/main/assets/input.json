@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Kyle",
+    "meetings": ["1:30PM", "2:30PM", "6PM"]
+  },
+  {
+    "name": "Paul",
+    "meetings": ["7AM", "9AM", "1:30PM", "3PM", "3:30PM"]
+  },
+  {
+    "name": "Alex",
+    "meetings": ["8AM", "9:30AM", "12:30PM", "3PM"]
+  },
+  {
+    "name": "Luis",
+    "meetings": ["9AM", "1:30PM", "3PM", "3:30PM"]
+  },
+  {
+    "name": "Jairo",
+    "meetings": ["8AM", "9AM", "6PM"]
+  },
+  {
+    "name": "Sonya",
+    "meetings": ["8AM", "12:30PM", "1:30PM", "3:30PM"]
+  }
+]

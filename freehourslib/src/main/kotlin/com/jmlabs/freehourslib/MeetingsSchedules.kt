@@ -15,7 +15,7 @@ fun List<FreeTime>.toJson(): String {
  * Represents "company" employee schedules, has access to employees meetings and
  * employees free time
  */
-class MeetingsSchedules(private val meetings: List<EmployeeMeetings>) {
+class MeetingsSchedules(val meetings: List<EmployeeMeetings>) {
 
     val freeTimeList = getFreeTimesInWorkHours()
 
