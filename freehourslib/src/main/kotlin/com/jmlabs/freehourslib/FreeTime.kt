@@ -3,6 +3,14 @@ package com.jmlabs.freehourslib
 import kotlinx.serialization.Serializable
 import java.time.LocalTime
 
+/**
+ * Represents a list of employees that are free at a specific time.
+ * This class gets serialized to Json:
+ * {
+ *   "time": "3:30PM",
+ *   "employees": ["Kyle", "Luis", "Alex"]
+ * }
+ */
 @Serializable
 data class FreeTime(val time: String, val employees: MutableList<String> = mutableListOf()) {
 

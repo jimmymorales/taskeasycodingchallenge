@@ -11,11 +11,15 @@ fun List<FreeTime>.toJson(): String {
     return JSON.stringify(this)
 }
 
+/**
+ * Represents "company" employee schedules, has access to employees meetings and
+ * employees free time
+ */
 class MeetingsSchedules(private val meetings: List<EmployeeMeetings>) {
 
-    val freeTimeList = getFreeTimes()
+    val freeTimeList = getFreeTimesInWorkHours()
 
-    private fun getFreeTimes(): List<FreeTime> {
+    fun getFreeTimesInWorkHours(): List<FreeTime> {
         val freeTimes = mutableListOf<FreeTime>()
         for (time in WORK_HOURS) {
             freeTimes.add(getFreeEmployeesAt(time))
@@ -23,7 +27,7 @@ class MeetingsSchedules(private val meetings: List<EmployeeMeetings>) {
         return freeTimes
     }
 
-    private fun getFreeEmployeesAt(time: LocalTime): FreeTime {
+    fun getFreeEmployeesAt(time: LocalTime): FreeTime {
         val freeTime = FreeTime.fromLocalTime(time)
         for (employeeMeeting in meetings) {
             if (employeeMeeting.isFreeTheNextHalfHour(time)) {
@@ -37,7 +41,7 @@ class MeetingsSchedules(private val meetings: List<EmployeeMeetings>) {
         /**
          * List of local times from 8AM to 5PM, excluding lunch (12PM-1PM)
          */
-        private val WORK_HOURS = listOf(
+        val WORK_HOURS = listOf(
             LocalTime.of(8, 0),     // 8AM
             LocalTime.of(8, 30),    // 8:30AM
             LocalTime.of(9, 0),     // 9AM

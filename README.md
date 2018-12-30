@@ -92,7 +92,7 @@ The output is a json file with the following sintax:
     ...
   ]
 ```
-Exampe file: [output.json](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/output.json)
+Example file: [output.json](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/output.json)
 
 ### Dependencies
 * Java Runtime Enviroment 7 or greater
@@ -104,6 +104,13 @@ Exampe file: [output.json](https://github.com/jimmymorales/taskeasycodingchallen
   ./gradlew jvm-app:build
 ```
 This generates a .jar file in `jvm-app/build/libs/jvm-app.jar`.
+
+### Run tests
+```shell
+  ./gradlew test
+```
+This will generate a html report. You can see the report in the following path:
+`freehourslib/build/reports/tests/test/index.html`
 
 ### Run
 ```shell
