@@ -20,6 +20,7 @@ class AddMeetingFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Get view model from activity
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(MeetingsViewModel::class.java)
         } ?: throw Exception("Invalid Activity")

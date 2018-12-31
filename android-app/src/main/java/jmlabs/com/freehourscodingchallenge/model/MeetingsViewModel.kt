@@ -15,6 +15,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ImplicitReflectionSerializer
 
+/**
+ * Meetings model is in charge of providing to the UI the employees meeting
+ * and free times, also adding meetings.
+ * Meetings are only saved on memory and not on storage.
+ * This uses the freehourslib for calculating the employees that are free in work hours.
+ */
 @ImplicitReflectionSerializer
 class MeetingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -23,13 +29,16 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
 
     private val meetingsLiveData = MutableLiveData<List<EmployeeMeetings>>()
 
-    val freeTimes = Transformations.switchMap(meetingsLiveData) {
+    // Every time the employee meetings list change will calculate
+    // free times again.
+    val freeTimes: LiveData<List<FreeTime>> = Transformations.switchMap(meetingsLiveData) {
         val freeTimes = MutableLiveData<List<FreeTime>>()
         freeTimes.value = MeetingsSchedules(it).freeTimeList
         freeTimes
     }
 
     init {
+        // reads and parse json on io thread
         ioScope.launch {
             val json = String(
                 application.applicationContext.assets.open("input.json").readBytes())
@@ -39,14 +48,25 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    /**
+     * Returns list of employee meetings
+     */
     fun getMeetings() : LiveData<List<EmployeeMeetings>> {
         return meetingsLiveData
     }
 
+    /**
+     * Return list of employees
+     */
     fun getEmployees(): List<String> {
         return meetingsLiveData.value?.map { it.name } ?: listOf()
     }
 
+    /**
+     * Adds meeting live data object
+     * @param employee name of employee
+     * @param time time of meeting
+     */
     fun addMeeting(employee: String, time: String) {
         val employeeMeetings = meetingsLiveData.value?.find { it.name == employee }
 
@@ -69,6 +89,6 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+        job.cancel() // when view model gets clear cancel job
     }
 }
