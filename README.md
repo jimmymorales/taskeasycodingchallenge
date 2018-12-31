@@ -36,20 +36,20 @@ Result should be in a format that can be used as an input for another program
 The solution was written using Kotlin and it runs on the JVM.
 
 ### Code
-The main entry point of the app is [main.kt](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/jvm-app/src/main/kotlin/Main.kt).
+The main entry point of the app is [main.kt](jvm-app/src/main/kotlin/Main.kt).
 
-The rest of the logic is in the [freehourslib](https://github.com/jimmymorales/taskeasycodingchallenge/tree/master/freehourslib/src/main/kotlin/com/jmlabs/freehourslib).
+The rest of the logic is in the [freehourslib](freehourslib/src/main/kotlin/com/jmlabs/freehourslib).
 
 Where:
-* [MeetingsSchedules.kt](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/freehourslib/src/main/kotlin/com/jmlabs/freehourslib/MeetingsSchedules.kt): Represents "company" employee schedules, gives access to employees meetings and employees free time
-* [EmployeeMeetings.kt](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/freehourslib/src/main/kotlin/com/jmlabs/freehourslib/EmployeeMeetings.kt): Represents a list of time meetings of an employee. This class get serialized to Json:
+* [MeetingsSchedules.kt](freehourslib/src/main/kotlin/com/jmlabs/freehourslib/MeetingsSchedules.kt): Represents "company" employee schedules, gives access to employees meetings and employees free time
+* [EmployeeMeetings.kt](freehourslib/src/main/kotlin/com/jmlabs/freehourslib/EmployeeMeetings.kt): Represents a list of time meetings of an employee. This class get serialized to Json:
  ```json
   {
     "name": "Kyle",
     "meetings": ["8AM", "1:30PM", "2PM"]
   }
 ```
-* [FreeTime.kt](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/freehourslib/src/main/kotlin/com/jmlabs/freehourslib/FreeTime.kt): Represents a list of employees that are free at a specific time. This class gets serialized to Json:
+* [FreeTime.kt](freehourslib/src/main/kotlin/com/jmlabs/freehourslib/FreeTime.kt): Represents a list of employees that are free at a specific time. This class gets serialized to Json:
 ```json
   {
     "time": "3:30PM",
@@ -75,7 +75,7 @@ Input JSON file has to have this sintax:
     ...
   ]
 ```
-Example file: [input.json](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/input.json)
+Example file: [input.json](input.json)
 
 ### Output
 The output is a json file with the following sintax:
@@ -92,7 +92,7 @@ The output is a json file with the following sintax:
     ...
   ]
 ```
-Example file: [output.json](https://github.com/jimmymorales/taskeasycodingchallenge/blob/master/output.json)
+Example file: [output.json](output.json)
 
 ### Dependencies
 * Java Runtime Enviroment 7 or greater
@@ -112,8 +112,20 @@ This generates a .jar file in `jvm-app/build/libs/jvm-app.jar`.
 This will generate a html report. You can see the report in the following path:
 `freehourslib/build/reports/tests/test/index.html`
 
+Tests are in the path [freehourslib/src/test/kotlin/com/jmlabs/freehourslib](freehourslib/src/test/kotlin/com/jmlabs/freehourslib)
+
 ### Run
 ```shell
   java -jar jvm-app/build/libs/jvm-app.jar input.json output.json
 ```
 This will get as input the file from the relative path `./input.json` and writes the output to the relative path `./output.json`.
+
+## Bonus
+Since this challenge is for getting an android developer job opportunity, I also decided to spend some time doing a small app where you can see the list of meetings and employees and the free time of each employee in work hours.
+
+You can download the apk from [here](https://github.com/jimmymorales/taskeasycodingchallenge/releases/tag/v0.0.1). Or use android studio to build and run the app on a device.
+
+### Screenshots
+![Free times list screenshot](screenshots/freetimes.jpg)
+![Meetings list screenshot](screenshots/meetings.jpg)
+![Adding a meeting screenshot](screenshots/adding_meetings.jpg)
