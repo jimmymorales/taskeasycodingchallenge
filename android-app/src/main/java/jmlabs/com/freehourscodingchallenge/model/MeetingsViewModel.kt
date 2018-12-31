@@ -34,13 +34,30 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
             val json = String(
                 application.applicationContext.assets.open("input.json").readBytes())
             Log.d("TAG", json)
-            val meetings = MeetingsSchedules.fromJson(json).meetings
+            val meetings = MeetingsSchedules.fromJson(json).meetings.toMutableList()
             meetingsLiveData.postValue(meetings)
         }
     }
 
     fun getMeetings() : LiveData<List<EmployeeMeetings>> {
         return meetingsLiveData
+    }
+
+    fun getEmployees(): List<String> {
+        return meetingsLiveData.value?.map { it.name } ?: listOf()
+    }
+
+    fun addMeeting(employee: String, time: String) {
+        val meetingExists =
+            meetingsLiveData.value?.find { it.name == employee }
+                ?.meetings?.any { it == time } ?: false
+        if (meetingExists) {
+            throw Exception("Meeting already exists")
+        }
+
+        meetingsLiveData.value?.find { it.name == employee }
+            ?.meetings?.add(time)
+        meetingsLiveData.value = meetingsLiveData.value
     }
 
     override fun onCleared() {

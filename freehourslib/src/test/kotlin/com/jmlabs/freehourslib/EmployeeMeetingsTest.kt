@@ -7,8 +7,6 @@ import kotlinx.serialization.stringify
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.BlockJUnit4ClassRunner
-import java.time.DateTimeException
-import java.time.LocalTime
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
@@ -29,27 +27,32 @@ class EmployeeMeetingsTest {
             listOf("9AM", "11:30AM", "12PM", "4PM"))
 
     @Test
-    fun `should throw DateTimeException`() {
+    fun `should throw WrongTimeException`() {
         for (index in wrongTimeMeetings.meetings.indices) {
-            assertFailsWith(DateTimeException::class) {
-                wrongTimeMeetings.getLocalTime(index)
+            assertFailsWith(WrongTimeException::class) {
+                wrongTimeMeetings.getTime(index)
             }
         }
     }
 
     @Test
     fun `should convert to LocalTime`() {
-        assertEquals(timeMeetings.getLocalTime(0), LocalTime.of(9, 0))
-        assertEquals(timeMeetings.getLocalTime(1), LocalTime.of(11, 30))
-        assertEquals(timeMeetings.getLocalTime(2), LocalTime.of(12, 0))
-        assertEquals(timeMeetings.getLocalTime(3), LocalTime.of(16, 0))
+        assertEquals(timeMeetings.getTime(0),
+            MeetingsSchedules.getCalendar(9, 0))
+        assertEquals(timeMeetings.getTime(1),
+            MeetingsSchedules.getCalendar(11, 30))
+        assertEquals(timeMeetings.getTime(2),
+            MeetingsSchedules.getCalendar(12, 0))
+        assertEquals(timeMeetings.getTime(3),
+            MeetingsSchedules.getCalendar(16, 0))
     }
 
     @Test
     fun `should see if user is free`() {
-        assert(timeMeetings.isFreeTheNextHalfHour(LocalTime.of(14, 0)))
+        assert(timeMeetings.isFreeTheNextHalfHour(
+            MeetingsSchedules.getCalendar(14, 0)))
         assertFalse {
-            timeMeetings.isFreeTheNextHalfHour(LocalTime.of(9, 0))
+            timeMeetings.isFreeTheNextHalfHour(MeetingsSchedules.getCalendar(9, 0))
         }
     }
 

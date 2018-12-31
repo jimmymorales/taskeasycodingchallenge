@@ -1,7 +1,7 @@
 package com.jmlabs.freehourslib
 
 import kotlinx.serialization.Serializable
-import java.time.LocalTime
+import java.util.*
 
 /**
  * Represents a list of employees that are free at a specific time.
@@ -15,15 +15,17 @@ import java.time.LocalTime
 data class FreeTime(val time: String, val employees: MutableList<String> = mutableListOf()) {
 
     companion object {
-        fun fromLocalTime(localTime: LocalTime): FreeTime {
+        fun fromCalendar(calendar: Calendar): FreeTime {
+            val hour = calendar.get(Calendar.HOUR)
+            val minutes = calendar.get(Calendar.MINUTE)
             val time =
-                (when {
-                    localTime.hour > 12 -> localTime.hour - 12
-                    localTime.hour == 0 -> 12
-                    else -> localTime.hour
-                }).toString() +
-                (if (localTime.minute == 0) "" else ":"+localTime.minute.toString()) +
-                if (localTime.hour > 11) "PM" else "AM"
+                (if (hour != 0) hour else 12).toString() +
+                (if (minutes != 0) ":"+minutes.toString() else "") +
+                (when (calendar.get(Calendar.AM_PM)) {
+                    Calendar.AM -> "AM"
+                    Calendar.PM -> "PM"
+                    else -> throw Exception("Wrong time")
+                })
 
             return FreeTime(time)
         }

@@ -3,7 +3,6 @@ package com.jmlabs.freehourslib
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.BlockJUnit4ClassRunner
-import java.time.LocalTime
 import kotlin.test.assertEquals
 
 @RunWith(BlockJUnit4ClassRunner::class)
@@ -17,21 +16,25 @@ class MeetingsSchedulesTest {
 
     @Test
     fun `should get employees with free time`() {
-        val freeTime9AM = meetingsSchedules.getFreeEmployeesAt(LocalTime.of(9, 0))
+        val freeTime9AM = meetingsSchedules
+            .getFreeEmployeesAt(MeetingsSchedules.getCalendar(9, 0))
         assertEquals(freeTime9AM.time, "9AM")
         assertEquals(freeTime9AM.employees.size, 0)
 
-        val freeTime1130AM = meetingsSchedules.getFreeEmployeesAt(LocalTime.of(11, 30))
+        val freeTime1130AM = meetingsSchedules
+            .getFreeEmployeesAt(MeetingsSchedules.getCalendar(11, 30))
         assertEquals(freeTime1130AM.time, "11:30AM")
         assertEquals(freeTime1130AM.employees.size, 1)
         assertEquals(freeTime1130AM.employees[0], "Mary")
 
-        val freeTime2PM = meetingsSchedules.getFreeEmployeesAt(LocalTime.of(14, 0))
+        val freeTime2PM = meetingsSchedules
+            .getFreeEmployeesAt(MeetingsSchedules.getCalendar(14, 0))
         assertEquals(freeTime2PM.time, "2PM")
         assertEquals(freeTime2PM.employees.size, 2)
         assertEquals(freeTime2PM.employees, listOf("John", "Frank"))
 
-        val freeTime430PM = meetingsSchedules.getFreeEmployeesAt(LocalTime.of(16, 30))
+        val freeTime430PM = meetingsSchedules
+            .getFreeEmployeesAt(MeetingsSchedules.getCalendar(16, 30))
         assertEquals(freeTime430PM.time, "4:30PM")
         assertEquals(freeTime430PM.employees.size, 3)
         assertEquals(freeTime430PM.employees, listOf("John", "Mary", "Frank"))
