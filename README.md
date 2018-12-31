@@ -94,14 +94,25 @@ The output is a json file with the following sintax:
 ```
 Example file: [output.json](output.json)
 
+### Run
+```shell
+  java -jar jvm-app.jar input.json output.json
+```
+This will get as input the file from the relative path `./input.json` and writes the output to the relative path `./output.json`.
+
+
 ### Dependencies
 * Java Runtime Enviroment 7 or greater
+* Android Studio (Needed for building android app)
 
 ### Build
+To be able to build the jar using gradle you need to open the project with android studio.
+This will create a local.properties file where the android sdk path is set.
+
 ```shell
   git clone https://github.com/jimmymorales/taskeasycodingchallenge.git
   cd taskeasycodingchallenge
-  ./gradlew jvm-app:build
+  ./gradlew :jvm-app:build
 ```
 This generates a .jar file in `jvm-app/build/libs/jvm-app.jar`.
 
@@ -113,12 +124,6 @@ This will generate a html report. You can see the report in the following path:
 `freehourslib/build/reports/tests/test/index.html`
 
 Tests are in the path [freehourslib/src/test/kotlin/com/jmlabs/freehourslib](freehourslib/src/test/kotlin/com/jmlabs/freehourslib)
-
-### Run
-```shell
-  java -jar jvm-app/build/libs/jvm-app.jar input.json output.json
-```
-This will get as input the file from the relative path `./input.json` and writes the output to the relative path `./output.json`.
 
 ## Bonus
 Since this challenge is for getting an android developer job opportunity, I also decided to spend some time doing a small app where you can see the list of meetings and employees and the free time of each employee in work hours.
