@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import jmlabs.com.freehourscodingchallenge.AddMeetingFragment
 import jmlabs.com.freehourscodingchallenge.R
 import jmlabs.com.freehourscodingchallenge.model.MeetingsViewModel
 import kotlinx.android.synthetic.main.fragment_meetings.view.*

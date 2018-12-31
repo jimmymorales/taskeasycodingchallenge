@@ -32,7 +32,7 @@ class AddMeetingFragment : DialogFragment() {
                 .inflate(R.layout.dialog_add_meeting, null)
 
             val employeesAdapter = ArrayAdapter(
-                context, android.R.layout.simple_spinner_item, viewModel.getEmployees())
+                context!!, android.R.layout.simple_spinner_item, viewModel.getEmployees())
             employeesAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item)
             view.spinnerEmployee.adapter = employeesAdapter

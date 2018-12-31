@@ -12,7 +12,7 @@ import java.util.*
  * }
  */
 @Serializable
-data class EmployeeMeetings(val name: String, val meetings: MutableList<String>) {
+data class EmployeeMeetings(val name: String, val meetings: List<String>) {
     fun isFreeTheNextHalfHour(time: Calendar): Boolean {
         for (index in meetings.indices) {
             val meetingLocalTime = getTime(index)

@@ -34,8 +34,8 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
             val json = String(
                 application.applicationContext.assets.open("input.json").readBytes())
             Log.d("TAG", json)
-            val meetings = MeetingsSchedules.fromJson(json).meetings.toMutableList()
-            meetingsLiveData.postValue(meetings)
+            meetingsLiveData.postValue(
+                MeetingsSchedules.fromJson(json).meetings.toMutableList())
         }
     }
 
@@ -48,16 +48,23 @@ class MeetingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun addMeeting(employee: String, time: String) {
+        val employeeMeetings = meetingsLiveData.value?.find { it.name == employee }
+
         val meetingExists =
-            meetingsLiveData.value?.find { it.name == employee }
-                ?.meetings?.any { it == time } ?: false
+            employeeMeetings?.meetings?.any { it == time } ?: false
         if (meetingExists) {
             throw Exception("Meeting already exists")
         }
 
-        meetingsLiveData.value?.find { it.name == employee }
-            ?.meetings?.add(time)
+        val meetings = employeeMeetings?.meetings?.toMutableList()
+        meetings?.add(time)
         meetingsLiveData.value = meetingsLiveData.value
+            ?.map {
+                if(it.name == employee)
+                    it.copy(meetings = meetings!!.toList())
+                else
+                    it
+            }
     }
 
     override fun onCleared() {
