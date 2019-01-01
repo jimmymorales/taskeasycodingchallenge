@@ -125,7 +125,7 @@ Tests are in the path [freehourslib/src/test/kotlin/com/jmlabs/freehourslib](fre
 ## Bonus
 Since this challenge is for getting an android developer job opportunity, I also decided to spend some time doing a small app where you can see the list of meetings and employees and the free time of each employee in work hours.
 
-You can download the apk from [here](https://github.com/jimmymorales/taskeasycodingchallenge/releases/tag/v0.0.1). Or open the [android-app](andriod-app) directory with Android Studio to build and run the app on a device.
+You can download the apk from [here](https://github.com/jimmymorales/taskeasycodingchallenge/releases/tag/v0.0.1). Or open the [android-app](android-app) directory with Android Studio to build and run the app on a device.
 
 ### Screenshots
 ![Free times list screenshot](android-app/screenshots/freetimes.jpg)
