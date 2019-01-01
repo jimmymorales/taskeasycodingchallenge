@@ -1,1 +1,1 @@
-include ':android-app', ':jvm-app', ':freehourslib'
+include ':jvm-app', ':freehourslib'
