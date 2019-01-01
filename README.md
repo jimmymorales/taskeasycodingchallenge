@@ -106,9 +106,6 @@ This will get as input the file from the relative path `./input.json` and writes
 * Android Studio (Needed for building android app)
 
 ### Build
-To be able to build the jar using gradle you need to open the project with android studio.
-This will create a local.properties file where the android sdk path is set.
-
 ```shell
   git clone https://github.com/jimmymorales/taskeasycodingchallenge.git
   cd taskeasycodingchallenge
@@ -128,9 +125,9 @@ Tests are in the path [freehourslib/src/test/kotlin/com/jmlabs/freehourslib](fre
 ## Bonus
 Since this challenge is for getting an android developer job opportunity, I also decided to spend some time doing a small app where you can see the list of meetings and employees and the free time of each employee in work hours.
 
-You can download the apk from [here](https://github.com/jimmymorales/taskeasycodingchallenge/releases/tag/v0.0.1). Or use android studio to build and run the app on a device.
+You can download the apk from [here](https://github.com/jimmymorales/taskeasycodingchallenge/releases/tag/v0.0.1). Or open the [android-app](andriod-app) directory with Android Studio to build and run the app on a device.
 
 ### Screenshots
-![Free times list screenshot](screenshots/freetimes.jpg)
-![Meetings list screenshot](screenshots/meetings.jpg)
-![Adding a meeting screenshot](screenshots/adding_meetings.jpg)
+![Free times list screenshot](android-app/screenshots/freetimes.jpg)
+![Meetings list screenshot](android-app/screenshots/meetings.jpg)
+![Adding a meeting screenshot](android-app/screenshots/adding_meetings.jpg)
